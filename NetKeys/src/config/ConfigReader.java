@@ -29,7 +29,7 @@ public class ConfigReader {
 
 		while (sc.hasNextLine()) {
 			String line = sc.nextLine();
-			if (line != "") {
+			if (line != "" && !line.trim().startsWith("#")) {
 				int splitIndex = line.indexOf("=");
 				String propertyName = line.substring(0, splitIndex);
 				String value = line.substring(splitIndex + 1);

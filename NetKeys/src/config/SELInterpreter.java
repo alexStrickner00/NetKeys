@@ -66,7 +66,8 @@ public class SELInterpreter {
 		}
 
 		if (ex.startsWith("send")) {
-			con.getWriter().println(ex.substring(ex.indexOf("(", 4) + 1, ex.lastIndexOf(")")));
+			String sendString = ex.substring(ex.indexOf("(", 4) + 1, ex.lastIndexOf(")"));
+			con.getWriter().println(sendString);
 			con.getWriter().flush();
 		} else if (ex.startsWith("var")) {
 			String key = ex.substring(ex.indexOf("(") + 1, ex.indexOf(",")).trim();
