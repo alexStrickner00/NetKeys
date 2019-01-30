@@ -14,7 +14,7 @@ public class NetworkConnection {
 
 	private BufferedReader reader;
 	private PrintWriter writer;
-
+	
 	public NetworkConnection(String ip, int port) {
 		this.ip = ip;
 		this.port = port;

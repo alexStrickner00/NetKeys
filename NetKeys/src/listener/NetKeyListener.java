@@ -2,7 +2,10 @@ package listener;
 
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
+import java.io.FileNotFoundException;
 import java.io.IOException;
+
+import config.ConfigReader;
 import config.SELInterpreter;
 import network.NetworkConnection;
 
@@ -10,20 +13,25 @@ public class NetKeyListener implements KeyListener {
 
 	private NetworkConnection con;
 	private SELInterpreter interpreter;
+	private ConfigReader config;
 
 	public NetKeyListener() {
-		con = new NetworkConnection("127.0.0.1", 8099);
+		config = new ConfigReader("socket.conf");
+		try {
+			config.readConfigFile();
+		} catch (FileNotFoundException e1) {
+			e1.printStackTrace();
+		}
+		con = new NetworkConnection(config.getPropertyByName("ip"), Integer.parseInt(config.getPropertyByName("port")));
 		try {
 			con.connect();
 		} catch (IOException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-		
 
 		interpreter = new SELInterpreter(con);
-		interpreter.interpretFile("keys.conf");
-		
+		interpreter.interpretFile("keys.sel");
+
 	}
 
 	@Override
@@ -37,14 +45,10 @@ public class NetKeyListener implements KeyListener {
 
 	@Override
 	public void keyPressed(KeyEvent e) {
-		// TODO Auto-generated method stub
-
 	}
 
 	@Override
 	public void keyReleased(KeyEvent e) {
-		// TODO Auto-generated method stub
-
 	}
 
 }
