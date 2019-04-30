@@ -1,4 +1,5 @@
 var(player,0)
+0=var(player,0)
 1=var(player,1)
 2=var(player,2)
 3=var(player,3)
